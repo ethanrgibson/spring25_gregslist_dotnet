@@ -1,5 +1,6 @@
 
 
+
 namespace gregslist_dotnet.Repositories;
 
 public class HousesRepository
@@ -55,5 +56,28 @@ public class HousesRepository
     return house;
 
 
+  }
+
+  internal House CreateHouse(House houseData)
+  {
+    string sql = @"
+INSERT INTO 
+  houses (sqft, bedrooms, bathrooms, img_url, description, price, creator_id)
+  VALUES (@Sqft, @Bedrooms, @Bathrooms, @ImgUrl, @Description, @Price, @CreatorId);
+
+
+SELECT houses.*,
+  accounts.* 
+  FROM houses 
+  INNER JOIN accounts on accounts.id = houses.creator_id
+  WHERE houses.id = LAST_INSERT_ID();";
+
+    House createdHouse = _db.Query(sql, (House house, Account account) =>
+    {
+      house.Creator = account;
+      return house;
+    }, houseData).SingleOrDefault();
+
+    return createdHouse;
   }
 }

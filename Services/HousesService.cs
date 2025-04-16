@@ -1,5 +1,6 @@
 
 
+
 namespace gregslist_dotnet.Services;
 
 public class HousesService
@@ -25,6 +26,12 @@ public class HousesService
   internal House GetHouseById(int houseId)
   {
     House house = _housesRepository.GetHouseById(houseId);
+    return house;
+  }
+
+  internal House CreateHouse(House houseData)
+  {
+    House house = _housesRepository.CreateHouse(houseData);
     return house;
   }
 }
