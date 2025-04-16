@@ -1,3 +1,3 @@
-export const domain = 'YOUR'
-export const clientId = 'STUFF'
-export const audience = 'GOES HERE'
+export const domain = 'dev-6gqadwkl0v55aq8i.us.auth0.com'
+export const clientId = 'hyEonIcDcUxIsrRhxq0pYeGv4eyjMyGr'
+export const audience = 'https://auth.firstappapi.com'
