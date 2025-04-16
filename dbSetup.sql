@@ -52,3 +52,34 @@ WHERE cars.id = 3;
 
 
 UPDATE cars SET make = "mazda", model = "miata" WHERE id = 5 LIMIT 1;
+
+
+
+
+CREATE TABLE houses(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ sqft INT NOT NULL,
+ bedrooms INT NOT NULL,
+ bathrooms DOUBLE NOT NULL,
+ img_url VARCHAR(255) NOT NULL,
+ description VARCHAR(255) NOT NULL,
+ price INT NOT NULL,
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+creator_id VARCHAR(255) NOT NULL,
+FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE
+);
+
+
+
+INSERT INTO houses (sqft, bedrooms, bathrooms, img_url, description, price, creator_id)
+VALUES (4500, 12, 3, 'https://images.unsplash.com/photo-1679683171686-6242c0fde282?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'nasty looking old house', 100, '67e1d01f295e7e41d97fdd24');
+
+SELECT * FROM houses:
+
+
+SELECT 
+houses.*,
+accounts.*
+FROM houses
+INNER JOIN accounts on accounts.id = houses.creator_id
