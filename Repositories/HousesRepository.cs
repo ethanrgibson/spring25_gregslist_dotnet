@@ -99,4 +99,32 @@ SELECT houses.*,
     }
 
   }
+
+  internal void UpdateHouse(House house)
+  {
+string sql = @"
+
+UPDATE houses
+SET
+sqft = @Sqft,
+bathrooms = @Bathrooms,
+bedrooms = @Bedrooms,
+description = @Description,
+img_url = @ImgUrl,
+price = @Price
+WHERE id = @Id
+LIMIT 1;";
+
+int rowsAffected = _db.Execute(sql, house);
+
+  if (rowsAffected == 0)
+    {
+      throw new Exception("No Rows Were Updated");
+    }
+
+    if (rowsAffected > 1)
+    {
+      throw new Exception(rowsAffected + "rows were affected. BAD NEWS!!!");
+    }
+  }
 }

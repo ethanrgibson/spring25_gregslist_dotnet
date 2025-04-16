@@ -49,4 +49,26 @@ public class HousesService
     return $"House {houseId}, was deleted. Forever and ever.";
 
   }
+
+  internal House UpdateHouse(int houseId, House updatedHouseData, Account userInfo)
+  {
+    House house = GetHouseById(houseId);
+
+    if (house.CreatorId != userInfo.Id)
+    {
+      throw new Exception("CANNOT UPDATE A HOUSE YOU DID NOT CREATE");
+    }
+
+    house.Sqft = updatedHouseData.Sqft ?? house.Sqft;
+    house.Bathrooms = updatedHouseData.Bathrooms ?? house.Bathrooms;
+    house.Bedrooms = updatedHouseData.Bedrooms ?? house.Bedrooms;
+    house.Description = updatedHouseData.Description ?? house.Description;
+    house.ImgUrl = updatedHouseData.ImgUrl ?? house.ImgUrl;
+    house.Price = updatedHouseData.Price ?? house.Price;
+
+    _housesRepository.UpdateHouse(house);
+
+    return house;
+
+  }
 }
