@@ -75,7 +75,7 @@ FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE
 INSERT INTO houses (sqft, bedrooms, bathrooms, img_url, description, price, creator_id)
 VALUES (4500, 12, 3, 'https://images.unsplash.com/photo-1679683171686-6242c0fde282?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'nasty looking old house', 100, '67e1d01f295e7e41d97fdd24');
 
-SELECT * FROM houses:
+SELECT * FROM houses;
 
 
 SELECT 
