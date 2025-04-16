@@ -77,7 +77,11 @@ VALUES (50000, 3, 1200, 'https://images.unsplash.com/photo-1557434440-cad44ef92c
 
 SELECT * FROM houses;
 
-SELECT * FROM houses WHERE id = 2;
+SELECT houses.*,
+accounts.* 
+FROM houses 
+INNER JOIN accounts on accounts.id = houses.creator_id
+WHERE id = 2;
 
 SELECT 
 houses.*,
