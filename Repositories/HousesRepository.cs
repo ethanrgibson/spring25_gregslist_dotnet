@@ -1,4 +1,5 @@
 
+
 namespace gregslist_dotnet.Repositories;
 
 public class HousesRepository
@@ -8,7 +9,6 @@ public class HousesRepository
   {
     _db = db;
   }
-
   private readonly IDbConnection _db;
 
   internal List<House> GetAllHouses()
@@ -18,5 +18,16 @@ public class HousesRepository
 
     List<House> houses = _db.Query<House>(sql).ToList();
     return houses;
+  }
+
+  internal House GetHouseById(int houseId)
+  {
+
+    string sql = "SELECT * FROM houses WHERE id = @houseId;";
+
+    House house = _db.Query<House>(sql, new { houseId }).SingleOrDefault();
+    return house;
+
+
   }
 }
