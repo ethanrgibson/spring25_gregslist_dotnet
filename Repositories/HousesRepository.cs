@@ -14,9 +14,21 @@ public class HousesRepository
   internal List<House> GetAllHouses()
   {
 
-    string sql = "SELECT * FROM houses;";
+    string sql = @"
 
-    List<House> houses = _db.Query<House>(sql).ToList();
+    SELECT 
+    houses.*,
+    accounts.* 
+    FROM houses 
+    INNER JOIN accounts ON accounts.id = houses.creator_id;";
+
+    List<House> houses = _db.Query(sql, (House house, Account account) =>
+    {
+
+      house.Creator = account;
+      return house;
+
+    }).ToList();
     return houses;
   }
 
